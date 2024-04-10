@@ -1,7 +1,6 @@
 //create an express variable and require the package from express node_modules
 const express = require("express");
 
-//require dotenv
 const dotenv = require("dotenv");
 
 //create a mongoose variable
