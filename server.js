@@ -31,8 +31,32 @@ app.get("/blog", (req, res) => {
   res.send("Hello Blog, My Name Is Joe");
 });
 
+//fetch data from database
+app.get("/products", async (req, res) => {
+  try {
+    const data = await Product.find({});
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+//get a single product use id
+app.get("/products/:id", async (req, res) => {
+  try {
+    //deconstruct id
+    const { id } = req.params;
+    //pass id
+    const product = await Product.findById(id);
+    //response
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 //route for saving data into the database
-app.post("/product", async (req, res) => {
+app.post("/products", async (req, res) => {
   try {
     //create a new product in the db
     const product = await Product.create(req.body);
