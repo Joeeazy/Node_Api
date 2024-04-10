@@ -44,7 +44,7 @@ app.get("/products", async (req, res) => {
 //get a single product use id
 app.get("/products/:id", async (req, res) => {
   try {
-    //deconstruct id
+    //destructure id
     const { id } = req.params;
     //pass id
     const product = await Product.findById(id);
@@ -65,6 +65,26 @@ app.post("/products", async (req, res) => {
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: error.message });
+  }
+});
+
+//update/edit data in the database PUT
+app.put("/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    //fetch the id and the whole data to update
+    const product = await Product.findByIdAndUpdate(id, req.body);
+    //cannot find product
+    if (!product) {
+      return res
+        .status(404)
+        .json({ message: `cannot find the product with ID ${id}` });
+    }
+    //else return updated product
+    const updatedProduct = await Product.findById(id);
+    res.status(200).json(updatedProduct);
+  } catch (joe) {
+    res.status(500).json({ message: joe.message });
   }
 });
 
