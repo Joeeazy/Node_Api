@@ -11,8 +11,11 @@ const mongoose = require("mongoose");
 //initialize an app using
 const app = express();
 
-//middleware
+//middleware to use json as body
 app.use(express.json());
+
+//middleware to use urlencoded as body
+app.use(express.urlencoded({ extended: false }));
 
 //config dotenv to use it as process.env for environmental varables
 dotenv.config();
