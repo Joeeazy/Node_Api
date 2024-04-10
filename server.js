@@ -91,6 +91,22 @@ app.put("/products/:id", async (req, res) => {
   }
 });
 
+//delete data in db
+app.delete("/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findByIdAndDelete(id);
+    if (!product) {
+      return res
+        .status(400)
+        .json({ message: `couldn't find product with id ${id}` });
+    }
+    res.status(200).json({ message: "successfully deleted" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 //connect to you mongodb then console if connected or not
 //right way first connect to DB then listen to the port
 mongoose
