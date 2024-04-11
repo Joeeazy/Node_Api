@@ -20,6 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 //config dotenv to use it as process.env for environmental varables
 dotenv.config();
 
+//env port
+const PORT = process.env.PORT || 5000;
+
 //declare route to access the app in the browser
 //req === what client sends to you(request)
 //res === response back to the client
@@ -114,8 +117,8 @@ mongoose
   .then(() => {
     console.log("Connected to MongoDB");
     //make the app listen at a port eg 3000 donno why 3000 every single time
-    app.listen(5000, () => {
-      console.log("Node Api is running on port 5000");
+    app.listen(PORT, () => {
+      console.log(`Node Api is running on port ${PORT}`);
     });
   })
   .catch((error) => {
