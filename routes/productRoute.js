@@ -1,7 +1,3 @@
-//import product model
-
-const Product = require("../models/productModel");
-
 //import express for the Router method
 const express = require("express");
 
@@ -11,24 +7,26 @@ const router = express.Router();
 const {
   getProducts,
   getProduct,
-  sendProduct,
+  createProduct,
   updateProduct,
   deleteProduct,
 } = require("../controllers/productController");
 
-//fetch data from database
+//CRUD OPERATIONS CREATE, READ, UPDATE, DELETE
+
+//route to fetch data from database
 router.get("/", getProducts);
 
-//get a single product use id
+//route to get a single product use id
 router.get("/:id", getProduct);
 
-//route for saving data into the database
-router.post("/", sendProduct);
+//route for create data into the database
+router.post("/", createProduct);
 
-//update/edit data in the database PUT
+//route to update/edit data in the database PUT
 router.put("/:id", updateProduct);
 
-//delete data in db
+//route to delete data in db
 router.delete("/:id", deleteProduct);
 
 //export router

@@ -9,6 +9,9 @@ const router = require("./routes/productRoute");
 //create a mongoose variable
 const mongoose = require("mongoose");
 
+//import error middleware
+const errorMiddleware = require("./middleware/errorMiddleware");
+
 //initialize an app using
 const app = express();
 
@@ -30,15 +33,18 @@ const PORT = process.env.PORT || 5000;
 //req === what client sends to you(request)
 //res === response back to the client
 app.get("/", (req, res) => {
-  //send something to client
+  //send message to client
   res.send("Hello from Node Api");
 });
 
 //trying another route
 app.get("/blog", (req, res) => {
-  //send something to client
+  //send message to client
   res.send("Hello Blog, My Name Is Joe");
 });
+
+//use middleware
+app.use(errorMiddleware);
 
 //connect to you mongodb then console if connected or not
 //right way first connect to DB then listen to the port
