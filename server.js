@@ -29,6 +29,11 @@ dotenv.config();
 //env port
 const PORT = process.env.PORT || 5000;
 
+//cors policy
+var cors = require("cors");
+
+app.use(cors());
+
 //declare route to access the app in the browser
 //req === what client sends to you(request)
 //res === response back to the client
